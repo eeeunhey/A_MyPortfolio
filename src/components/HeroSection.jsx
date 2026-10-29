@@ -19,7 +19,7 @@ export const HeroSection = () => {
                              border border-primary/20 tracking-wider uppercase
                              opacity-0 animate-fade-in">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Frontend Developer
+              Web &amp; AI Developer
             </span>
 
             {/* 이름 + 가치 문구 */}

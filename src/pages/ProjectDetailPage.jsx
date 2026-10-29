@@ -1,6 +1,19 @@
-import { ArrowLeft, ExternalLink, Github, Users, Code2, Layers } from "lucide-react";
+import {
+    ArrowLeft,
+    ExternalLink,
+    Github,
+    Users,
+    Code2,
+    Layers,
+    Lightbulb,
+    AlertCircle,
+    CheckCircle2,
+    GitBranch,
+    Sparkles,
+    Award,
+} from "lucide-react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { projects } from "../components/ProjectsSection";
+import { projects } from "../data/projects";
 import { StarBackground } from "../components/StarBackground";
 import { ThemeToggle } from "../components/ThemeToggle";
 import { Navbar } from "../components/Navbar";
@@ -82,6 +95,78 @@ export const ProjectDetailPage = () => {
                                 </div>
                             </section>
 
+                            {/* 문제 배경 & 해결 방안 (Problem & Solution) */}
+                            {project.problem && project.solution && (
+                                <section>
+                                    <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+                                        <Lightbulb className="w-5 h-5 text-primary" />
+                                        문제 배경 및 해결 방안
+                                    </h2>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                        <div className="gradient-border rounded-xl p-5">
+                                            <h3 className="text-sm font-semibold text-rose-500 flex items-center gap-2 mb-3">
+                                                <AlertCircle className="w-4 h-4" />
+                                                Problem (해결 과제)
+                                            </h3>
+                                            <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
+                                                {project.problem.map((item, idx) => (
+                                                    <li key={idx} className="flex items-start gap-2">
+                                                        <span className="text-rose-500 font-bold">•</span>
+                                                        <span className="leading-relaxed">{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="gradient-border rounded-xl p-5">
+                                            <h3 className="text-sm font-semibold text-emerald-500 flex items-center gap-2 mb-3">
+                                                <CheckCircle2 className="w-4 h-4" />
+                                                Solution (해결 방안)
+                                            </h3>
+                                            <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
+                                                {project.solution.map((item, idx) => (
+                                                    <li key={idx} className="flex items-start gap-2">
+                                                        <span className="text-emerald-500 font-bold">•</span>
+                                                        <span className="leading-relaxed">{item}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* 시스템 아키텍처 흐름 */}
+                            {project.architecture && (
+                                <section>
+                                    <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+                                        <GitBranch className="w-5 h-5 text-primary" />
+                                        시스템 아키텍처 흐름
+                                    </h2>
+                                    <div className="gradient-border rounded-xl p-5">
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                            {project.architecture.map((step, idx) => (
+                                                <div
+                                                    key={idx}
+                                                    className="p-3 rounded-lg bg-card border border-border flex flex-col justify-center"
+                                                >
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className="w-4 h-4 rounded-full bg-primary/20 text-primary flex items-center justify-center text-[10px] font-bold">
+                                                            {idx + 1}
+                                                        </span>
+                                                        <span className="text-xs font-semibold text-foreground truncate">
+                                                            {step.name}
+                                                        </span>
+                                                    </div>
+                                                    <div className="text-[11px] text-muted-foreground leading-snug">
+                                                        {step.desc}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </section>
+                            )}
+
                             {/* 주요 기능 */}
                             <section>
                                 <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
@@ -96,12 +181,64 @@ export const ProjectDetailPage = () => {
                                          flex items-center justify-center text-[10px] font-bold shrink-0">
                                                     {i + 1}
                                                 </span>
-                                                {feat}
+                                                <span className="leading-relaxed">{feat}</span>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                             </section>
+
+                            {/* 개발 중 겪은 문제 및 해결 (Challenges) */}
+                            {project.challenges && (
+                                <section>
+                                    <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+                                        <Sparkles className="w-5 h-5 text-primary" />
+                                        개발 중 겪은 문제 및 해결
+                                    </h2>
+                                    <div className="space-y-3">
+                                        {project.challenges.map((chal, i) => (
+                                            <div key={i} className="gradient-border rounded-xl p-4 space-y-2">
+                                                <div className="flex items-start gap-2.5 text-xs sm:text-sm">
+                                                    <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-rose-500/10 text-rose-500 shrink-0 mt-0.5">
+                                                        문제
+                                                    </span>
+                                                    <p className="text-foreground/90 font-medium leading-relaxed">
+                                                        {chal.problem}
+                                                    </p>
+                                                </div>
+                                                <div className="flex items-start gap-2.5 text-xs sm:text-sm">
+                                                    <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-500 shrink-0 mt-0.5">
+                                                        해결
+                                                    </span>
+                                                    <p className="text-muted-foreground leading-relaxed">
+                                                        {chal.solution}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* 성과 및 배운 점 (Result & Learning) */}
+                            {project.results && (
+                                <section>
+                                    <h2 className="text-lg font-bold mb-3 flex items-center gap-2">
+                                        <Award className="w-5 h-5 text-primary" />
+                                        성과 및 배운 점
+                                    </h2>
+                                    <div className="gradient-border rounded-xl p-5">
+                                        <ul className="space-y-2.5 text-xs sm:text-sm text-muted-foreground">
+                                            {project.results.map((res, i) => (
+                                                <li key={i} className="flex items-start gap-2.5">
+                                                    <span className="text-primary font-bold mt-0.5">✓</span>
+                                                    <span className="leading-relaxed">{res}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </section>
+                            )}
 
                             {/* 기술 스택 */}
                             <section>

@@ -7,29 +7,37 @@ const skills = [
   { name: "JavaScript", icon: "⚡", category: "frontend" },
   { name: "React", icon: "⚛️", category: "frontend" },
   { name: "TypeScript", icon: "📘", category: "frontend" },
-  { name: "Tailwind CSS", icon: "🎨", category: "frontend" },
   { name: "Next.js", icon: "⬛", category: "frontend" },
+  { name: "Tailwind CSS", icon: "🎨", category: "frontend" },
+
+  // AI & Agent
+  { name: "LangGraph", icon: "🕸️", category: "ai" },
+  { name: "LangChain", icon: "🦜", category: "ai" },
+  { name: "Gemini API / LLM", icon: "🤖", category: "ai" },
+  { name: "Prompt Engineering", icon: "🎯", category: "ai" },
 
   // Backend
-  { name: "Node.js", icon: "🟩", category: "backend" },
-  { name: "Express", icon: "🚂", category: "backend" },
-  { name: "MongoDB", icon: "🍃", category: "backend" },
-  { name: "PostgreSQL", icon: "🐘", category: "backend" },
-  { name: "GraphQL", icon: "🔺", category: "backend" },
+  { name: "Python", icon: "🐍", category: "backend" },
+  { name: "Java", icon: "☕", category: "backend" },
+  { name: "Node.js / Express", icon: "🟩", category: "backend" },
+  { name: "Spring Boot", icon: "🍃", category: "backend" },
+  { name: "Supabase / PostgreSQL", icon: "🐘", category: "backend" },
+  { name: "Upstash Redis", icon: "⚡", category: "backend" },
+  { name: "MariaDB / Oracle", icon: "🐬", category: "backend" },
 
   // Tools
-  { name: "Git/Github", icon: "🐙", category: "tools" },
-  { name: "Notion", icon: "🗒️", category: "tools" },
+  { name: "Git / GitHub", icon: "🐙", category: "tools" },
   { name: "Docker", icon: "🐳", category: "tools" },
+  { name: "Vercel", icon: "▲", category: "tools" },
   { name: "Figma", icon: "🎨", category: "tools" },
-  { name: "VS Code", icon: "💻", category: "tools" },
 ];
 
-const categories = ["all", "frontend", "backend", "tools"];
+const categories = ["all", "frontend", "ai", "backend", "tools"];
 
 const categoryLabels = {
   all: "All",
   frontend: "Frontend",
+  ai: "AI & Agent",
   backend: "Backend",
   tools: "Tools",
 };

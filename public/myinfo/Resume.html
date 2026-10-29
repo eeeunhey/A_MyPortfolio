@@ -1,924 +1,411 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>이력서</title>
-  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
-  <link rel="stylesheet" href="resume.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>김은혜 이력서</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root{
+    --accent:#e8590c;      /* 포인트 색 — 원하면 여기만 바꾸면 됩니다 */
+    --ink:#222;
+    --sub:#555;
+    --muted:#888;
+    --line:#d9d9d9;
+    --paper:#fff;
+    --bg:#f2f2f2;
+    --todo:#fff3b0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;font-size:12px;line-height:1.7;font-weight:400}
+  a{color:inherit;text-decoration:none}
+  .page{width:210mm;min-height:297mm;margin:24px auto;padding:16mm 15mm 14mm;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+  .acc{color:var(--accent)}
+  .todo{}
+
+  /* header */
+  header{display:grid;grid-template-columns:96px 1fr auto auto;gap:20px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .photo{width:96px;height:124px;object-fit:cover;border-radius:6px}
+  .name{white-space:nowrap;font-size:34px;font-weight:500;letter-spacing:-1px;line-height:1.1;margin:0}
+  .name small{font-size:24px;font-weight:300;letter-spacing:-.5px}
+  .role{white-space:nowrap;margin-top:8px;font-size:14px;font-weight:500}
+  .role span{color:var(--muted);font-weight:400;font-size:12px;margin-left:6px}
+  .contact{list-style:none;margin:0;padding:0;font-size:12px;color:var(--sub);line-height:1.9}
+  .contact li{display:flex;align-items:center;gap:7px;white-space:nowrap}
+  .contact svg{width:13px;height:13px;fill:var(--sub);flex:none}
+
+  /* sections */
+  h2{font-size:19px;font-weight:500;margin:22px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--line);letter-spacing:-.3px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 34px}
+  .cols>section>h2{margin-top:18px}
+
+  /* education */
+  .edu{margin-bottom:10px}
+  .edu b{display:block;font-weight:500;color:var(--accent);font-size:13px}
+  .edu div{color:var(--sub)}
+  .edu .d{color:var(--muted);font-size:11.5px}
+
+  /* timeline */
+  .tl{position:relative;margin:0;padding:0 0 0 22px;list-style:none}
+  .tl:before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1.5px;background:var(--accent);opacity:.6}
+  .yr{position:relative;font-weight:700;color:var(--accent);font-size:14px;margin:4px 0 2px -22px;padding-left:0}
+  .yr:after{content:"";position:absolute;left:1px;top:7px;width:7px;height:7px;border:1.5px solid var(--accent);border-radius:50%;background:#fff}
+  .yr span{margin-left:22px}
+  .tl .ev{display:grid;grid-template-columns:44px 1fr;gap:8px;font-size:12px;line-height:1.7}
+  .tl .ev i{font-style:normal;color:var(--muted);font-size:10.5px;text-align:right}
+  .tl .ev.hl span{color:var(--accent);font-weight:500}
+
+  /* awards */
+  .awards{display:grid;grid-template-columns:1fr 1fr;gap:2px 34px;color:var(--sub);margin:0;padding:0;list-style:none}
+  .awards b{color:var(--accent);font-weight:500}
+
+  /* entries */
+  .entry{margin:10px 0 13px}
+  .entry h3{font-size:16px;font-weight:700;margin:0 0 4px;letter-spacing:-.3px}
+  .entry h3 .ctx{font-size:13px;font-weight:400;color:var(--accent)}
+  .entry h3 .dt{font-size:13px;font-weight:400;color:var(--sub)}
+  .entry p{margin:0;color:var(--sub)}
+  .entry ul{margin:4px 0 0;padding-left:20px;list-style:none}
+  .entry li{position:relative;color:var(--sub)}
+  .entry li:before{content:"";position:absolute;left:-17px;top:6px;width:7px;height:7px;border:1.5px solid var(--accent);border-radius:50%}
+  .entry li b{font-weight:700;color:var(--ink)}
+  .entry .link{font-size:11.5px;color:var(--accent)}
+
+  /* community */
+  .comm{display:grid;grid-template-columns:1fr 1fr;gap:0 34px}
+  .comm h3{font-size:15px;font-weight:500;margin:4px 0 6px}
+  .comm ul{margin:0;padding:0;list-style:none}
+  .comm li{border-left:2px solid var(--ink);padding-left:9px;margin:3px 0;color:var(--sub);line-height:1.5}
+  .comm li ul li{border:0;padding-left:12px;position:relative;font-size:11px}
+  .comm li ul li:before{content:"";position:absolute;left:2px;top:7px;width:4px;height:4px;border-radius:50%;background:var(--sub)}
+
+  .note{max-width:210mm;margin:0 auto 8px;padding:10px 14px;background:var(--todo);color:#6b5600;font-size:12px;border-radius:6px}
+
+  @media screen and (max-width:700px){
+    .page{width:auto;min-height:0;margin:0;padding:24px 16px;box-shadow:none}
+    header{grid-template-columns:80px 1fr}
+    .contact{grid-column:span 2}
+    .photo{width:80px;height:104px}
+    .name{font-size:30px}
+    .cols,.awards,.comm{grid-template-columns:1fr}
+  }
+  .skills{display:grid;gap:2px}
+  .skills div{display:grid;grid-template-columns:86px 1fr;gap:10px;color:var(--sub)}
+  .skills b{color:var(--accent);font-weight:500}
+  @page{size:A4;margin:14mm 14mm 12mm}
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;min-height:0;width:auto;padding:0}
+    .page+.page h2:first-child{margin-top:22px !important}
+    .note{display:none}
+    .todo{background:none;color:inherit;padding:0}
+    .entry,.edu,.comm,.awards,.tl,.skills{break-inside:avoid} h2{break-after:avoid}
+  }
+</style>
 </head>
-
 <body>
-  <div class="container">
 
-    <!-- ========= 첫 페이지: 사이드바 + 본문(프로필/경력/프로젝트 카드) ========= -->
-    <div class="resume">
+<!-- ============ PAGE 1 ============ -->
+<div class="page">
+  <header>
+    <img class="photo" src="data:image/jpeg;base64,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" alt="김은혜 증명사진">
+    <div>
+      <h1 class="name">김은혜<small>(Eunhye Kim)</small></h1>
+      <div class="role">주니어 개발자 <span>웹 · 백엔드 · AI</span></div>
+    </div>
+    <ul class="contact">
+      <li><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>010-2627-1356</li>
+      <li><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>dmsgp2627@naver.com</li>
+    </ul>
+    <ul class="contact">
+      <li><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.4 1.1 2.9.8.1-.6.4-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg><a href="https://github.com/eeeunhey">github.com/eeeunhey</a></li>
+      <li><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.9 6h-3a15.7 15.7 0 0 0-1.4-3.6A8 8 0 0 1 18.9 8zM12 4c.8 1.2 1.5 2.5 1.9 4h-3.8c.4-1.4 1.1-2.8 1.9-4zM4.3 14a8.2 8.2 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4zm.8 2h3a15.7 15.7 0 0 0 1.4 3.6A8 8 0 0 1 5.1 16zm3-8h-3a8 8 0 0 1 4.3-3.6C8.9 5.5 8.4 6.7 8.1 8zM12 20c-.8-1.2-1.5-2.5-1.9-4h3.8c-.4 1.4-1.1 2.8-1.9 4zm2.3-6H9.7a14.7 14.7 0 0 1 0-4h4.6a14.7 14.7 0 0 1 0 4zm.3 5.6c.6-1.1 1.1-2.3 1.4-3.6h3a8 8 0 0 1-4.4 3.6zm1.8-5.6a16.5 16.5 0 0 0 0-4h3.4a8.2 8.2 0 0 1 0 4z"/></svg><a href="https://eunhye-portfolio.vercel.app/">eunhye-portfolio.vercel.app</a></li>
+    </ul>
+  </header>
 
-      <!-- ===== 왼쪽 사이드바 ===== -->
-      <aside>
-        <img src="images/eunhyeprofile.jpg" alt="Profile" class="aside-photo" />
-
-        <div class="aside-block">
-          <h3 class="aside-title">CONTACT</h3>
-          <ul class="aside-list">
-            <li>📞 +82-10-2627-1356</li>
-            <li>✉️ dmsgp2627@naver.com</li>
-            <li>🔗 github.com/eeeunhey</li>
-          </ul>
-        </div>
-
-        <div class="aside-block">
-          <h3 class="aside-title">EDUCATION</h3>
-          <div class="item" style="border-bottom:none; padding:0">
-            <div><b>고려사이버대학교</b></div>
-            <div class="meta">2026.03 – (편입재학)</div>
-            <div class="meta">AI 데이터과학부</div>
-          </div>
-          <div class="item" style="border-bottom:none; padding:10px 0 0">
-            <div><b>성남 폴리텍 하이테크 과정</b></div>
-            <div class="meta">2024.01 – 2024.12</div>
-            <div class="meta">Java (Spring/Boot/MyBatis/JPA)<br />Python (LLM / Object Detection)</div>
-          </div>
-          <div class="item" style="border-bottom:none; padding:10px 0 0">
-            <div><b>KDT 국비 과정 수료</b></div>
-            <div class="meta">2023.03 – 2023.09</div>
-            <div class="meta">C/Java/Python 기초, 실습</div>
-          </div>
-          <div class="item" style="border-bottom:none; padding:10px 0 0">
-            <div><b>한국방송통신대학교 졸업</b></div>
-            <div class="meta">2016.02 – 2021.02</div>
-            <div class="meta">식품영양학과</div>
-          </div>
-        </div>
-
-        <div class="aside-block">
-          <h3 class="aside-title">KEY SKILLS</h3>
-          <div style="display:flex; flex-wrap:wrap; gap:6px; font-size:14px">
-            <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white" alt="Java" />
-            <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
-            <img src="https://img.shields.io/badge/SQL-003B57?style=flat&logo=postgresql&logoColor=white" alt="SQL" />
-            <img src="https://img.shields.io/badge/Spring-6DB33F?style=flat&logo=spring&logoColor=white" alt="Spring" />
-            <img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=flat&logo=springboot&logoColor=white"
-              alt="Spring Boot" />
-            <img src="https://img.shields.io/badge/MyBatis-000000?style=flat&logo=databricks&logoColor=white"
-              alt="MyBatis" />
-            <img src="https://img.shields.io/badge/JPA-4B5563?style=flat&logo=hibernate&logoColor=white" alt="JPA" />
-            <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" alt="React" />
-            <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white" alt="Vite" />
-            <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=flat&logo=tailwindcss&logoColor=white"
-              alt="TailwindCSS" />
-            <img src="https://img.shields.io/badge/LLM-8B5CF6?style=flat&logo=openai&logoColor=white" alt="LLM" />
-            <img src="https://img.shields.io/badge/Object Detection-FF6F00?style=flat&logo=opencv&logoColor=white"
-              alt="Object Detection" />
-            <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" alt="Git" />
-            <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker" />
-            <img src="https://img.shields.io/badge/C%23 WinForms-512BD4?style=flat&logo=dotnet&logoColor=white"
-              alt="C# WinForms" />
-          </div>
-        </div>
-
-        <div class="aside-block">
-          <h3 class="aside-title">CERTIFICATIONS</h3>
-          <ul class="aside-list">
-            <li>컴퓨터활용능력 1급, 2급</li>
-            <li>ITQ A등급 (한글, 엑셀, 파워포인트)</li>
-            <li>GTQ 1급, 2급</li>
-            <li>자동차운전면허 1종 보통</li>
-          </ul>
-        </div>
-
-      </aside>
-
-      <!-- ===== 오른쪽 본문 ===== -->
-      <main>
-        <header class="header header-flex">
-          <div>
-            <h2 class="name">문제에서 배움을 찾고 성장하는</h2><br />
-            <h1 class="name">김은혜 입니다</h1>
-            <div class="role">JUNIOR DEVELOPER (WEB · BACKEND · AI)</div>
-          </div>
-          <div class="header-qr">
-            <img src="images/portfolio-qr.png" alt="포트폴리오 QR코드" />
-            <p>Portfolio</p>
-          </div>
-        </header>
-
-        <section class="section">
-          <h3 class="section-title">PROFESSIONAL PROFILE</h3>
-          <p>
-            저는 새로운 시도와 도전을 통해 문제를 발견하고 해결하며 성장해왔습니다.<br />
-            작은 단위로 나누어 해결하고 개선을 반복한 경험은 저를 더 나은 방향으로 이끌었고,<br />
-            앞으로도 이런 태도를 바탕으로 계속 발전해 나가겠습니다.
-          </p>
-        </section>
-
-        <section class="section">
-          <h3 class="section-title">EXPERIENCE</h3>
-
-          <div class="item">
-            <h4>솔루션팀 · 머신 비전 파트</h4>
-            <div class="meta">2024.02 – 2024.11</div>
-            <ul>
-              <li>비전 셋팅 및 카메라 파라미터 조정 지원</li>
-              <li>C# WinForms UI 일부 수정 및 테스트</li>
-              <li>테스트 결과 정리 및 개선 사항 보고</li>
-            </ul>
-          </div>
-
-          <div class="item">
-            <h4>쿠팡 물류 · 전산 / 관리</h4>
-            <div class="meta">2019.03 – 2021.11</div>
-            <ul>
-              <li>단기 인력 배치와 스케줄 조율</li>
-              <li>출고 전산 흐름 점검 및 마감 관리</li>
-              <li>마감 시점의 소통·조율 업무</li>
-            </ul>
-          </div>
-        </section>
-
-        <!-- ===== PROJECTS (목차 카드) ===== -->
-        <section class="section">
-          <h3 class="section-title">PROJECTS</h3>
-          <div class="proj-grid">
-            <!-- Velin 카드: 상세로 점프 -->
-            <a class="proj-card" href="#velin-detail">
-              <div class="proj-thumb"><img src="images/velin-logo.png" alt="Velin Logo" /></div>
-              <div class="proj-body">
-                <div class="proj-title">Velin — AI Interview Prep</div>
-                <div class="proj-date">2025.08–2025.09 (개인)</div>
-                <p class="proj-desc">면접 질문·근거·체크리스트 자동 생성, 세션별 분석을 제공하는 웹 서비스</p>
-                <div class="proj-meta">Frontend, Backend</div>
-              </div>
-            </a>
-
-            <!-- ALBAIT 카드: 상세로 점프 -->
-            <a class="proj-card" href="#albait-detail">
-              <div class="proj-thumb"><img src="images/Alba-logo.png" alt="ALBAIT Logo" /></div>
-              <div class="proj-body">
-                <div class="proj-title">ALBAIT — 콘솔 구인·구직 실습</div>
-                <div class="proj-date">2025.04–2025.05 (개인)</div>
-                <p class="proj-desc">콘솔에서 회원/공고/지원 CRUD와 관리자 통계를 구현한 Java·Oracle 실습</p>
-                <div class="proj-meta">Backend, Database</div>
-              </div>
-            </a>
-            <!-- Interview Simulator 카드 -->
-            <a class="proj-card" href="#interview-detail">
-              <div class="proj-thumb"><img src="../images/Mockinterview.png" alt="Interview Simulator" /></div>
-              <div class="proj-body">
-                <div class="proj-title">Interview Simulator</div>
-                <div class="proj-date">2025.09–2025.11 (팀)</div>
-                <p class="proj-desc">AI 면접 질문 생성, STT, 감정/집중도 시각화, 세션 리포트 제공</p>
-                <div class="proj-meta">React, TypeScript, WebRTC, Node/Express, MongoDB</div>
-              </div>
-            </a>
-
-            <!-- Ascend 카드 -->
-            <a class="proj-card" href="#ascend-detail">
-              <div class="proj-thumb"><img src="../images/ascend.png" alt="Ascend" /></div>
-              <div class="proj-body">
-                <div class="proj-title">Ascend — 이력서 코치 웹</div>
-                <div class="proj-date">2025.10–2025.12 (개인)</div>
-                <p class="proj-desc">이력서 업로드 → AI 항목별 점수·피드백·키워드 개선 제안</p>
-                <div class="proj-meta">React, TypeScript, Zustand, React Query, Puter.js</div>
-              </div>
-            </a>
-
-            <!-- ResumeBuilder 카드 -->
-            <a class="proj-card" href="#resumebuilder-detail">
-              <div class="proj-thumb"><img src="../images/resumeBuild.png" alt="ResumeBuilder" /></div>
-              <div class="proj-body">
-                <div class="proj-title">ResumeBuilder — 이력서 작성 지원</div>
-                <div class="proj-date">2025.10–2025.11 (개인)</div>
-                <p class="proj-desc">섹센별 입력 가이드와 실시간 미리보기로 작성 효율 개선</p>
-                <div class="proj-meta">React, TypeScript, Vite</div>
-              </div>
-            </a>
-
-            <!-- BalanceEat 카드 -->
-            <a class="proj-card" href="#balanceeat-detail">
-              <div class="proj-thumb"><img src="../images/BalanceEat.png" alt="BalanceEat" /></div>
-              <div class="proj-body">
-                <div class="proj-title">BalanceEat — AI 식단 관리</div>
-                <div class="proj-date">2025.10–2025.11 (팀)</div>
-                <p class="proj-desc">Gemini AI 기반 식단 추천·기록·시각화 서비스</p>
-                <div class="proj-meta">React, TypeScript, Gemini AI API</div>
-              </div>
-            </a>
-
-            <!-- Daily Emotion Log 카드 -->
-            <a class="proj-card" href="#emotion-detail">
-              <div class="proj-thumb"><img src="../images/EmotionLog.png" alt="Daily Emotion Log" /></div>
-              <div class="proj-body">
-                <div class="proj-title">Daily Emotion Log — 감정 기록</div>
-                <div class="proj-date">2025.12 (팀)</div>
-                <p class="proj-desc">감정 기록·AI 피드백·패턴 시각화 웹 서비스</p>
-                <div class="proj-meta">JavaScript, Flask, MariaDB, Gemini API</div>
-              </div>
-            </a>
-          </div>
-        </section>
-      </main>
-    </div> <!-- 🔚 여기서 .resume 끝!  -->
-
-    <!-- ✂ 새 페이지처럼 '딱 끊기' -->
-    <hr class="page-cut" />
-
-    <!-- ========= 아래부터는 사이드바 없이 단일 페이지 ========= -->
-
-    <!-- ========== Velin 상세 ========== -->
-    <section id="velin-detail" class="page">
-      <h2 class="proj-h-lg">Velin — AI Interview Prep</h2>
-      <div class="proj-sub">2025.08–2025.09 (개인) · Vite·React·Tailwind / Node·Express / Recharts / TanStack Query /
-        FFmpeg(WASM)</div>
-
-      <img class="hero" src="images/velin-mainpage.png" alt="Velin Screens" />
-
-      <div class="kv-rows">
-        <div class="kv-row">
-          <b>개요</b>
-          <p>면접 질문·근거·체크리스트 자동 생성과 멀티모달(영상/텍스트) 분석 기반
-            세션·질문 단위 리포트를 제공합니다.</p>
-        </div>
-
-        <div class="kv-row">
-          <b>개발 기간/인원</b>
-          <p>2025.08–2025.09 (6주) · 개인</p>
-        </div>
-
-        <div class="kv-row">
-          <b>기획 의도</b>
-          <ul>
-            <li>이론 학습만으로는 협업·운영 관점에서 부족함을 느꼈습니다</li>
-            <li>“함께 일하고 싶은 동료라면 어떤 질문과 근거가 필요할까?”라는 문제의식에서 출발했습니다</li>
-            <li>질문·참고 자료·체크리스트를 한눈에 제공하는 실무형 도구를 기획했습니다</li>
-          </ul>
-        </div>
-
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <div>
-            <ul>
-              <li>LLM 기반 질문/질문에 대한 근거 이론 / 코드 예시 제공</li>
-              <li>IT 직군별 실무 질문 생성 후 제공 </li>
-              <li>직군별 생성 질문 후 질문 추가 생성</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="16"
-                height="16" alt="">
-              React
-            </span>
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" width="16"
-                height="16" alt="">
-              Vite
-            </span>
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-                width="16" height="16" alt="">
-              Tailwind
-            </span>
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="16"
-                height="16" alt="">
-              Node·Express
-            </span>
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="16"
-                height="16" alt="">
-              MongoDB
-            </span>
-          </div>
-        </div>
-
-        <!-- 성과·배운 점 -->
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <div>
-            <ul class="learn">
-              <li><b>프롬프트 템플릿 설계</b> 과정을 통해 AI 출력 제어·일관성 유지의 중요성을 배움</li>
-              <li><b>React–Express–MongoDB 연동</b>으로 프론트와 백엔드, DB 연결 구조를 이해</li>
-              <li><b>JWT 인증과 파일 업로드</b>를 적용하며 보안과 데이터 흐름 관리 경험 습득</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- 참고 링크 -->
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="refs">
-            <a class="ref-link" href="https://github.com/eeeunhey/AI_InterviewPrep" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              https://github.com/eeeunhey/AI_InterviewPrep
-            </a>
-          </div>
-        </div>
-      </div><!-- 🔚 kv-rows 닫음 -->
-    </section>
-
-    <!-- ========== ALBAIT 상세 ========== -->
-    <section id="albait-detail" class="page">
-      <h2 class="proj-h-lg">ALBAIT — 콘솔 구인·구직 사이트 구현</h2>
-      <div class="proj-sub">2025.04–2025.05 (개인) · Java · Oracle · JDBC · DAO/VO</div>
-
-      <img class="hero hero--sm" src="images/ALBA-mainpage.png" alt="ALBAIT Screens" />
-
-      <div class="kv-rows">
-        <div class="kv-row">
-          <b>개요</b>
-          <p>개인/기업 회원관리, 공고/지원/상태변경, 관리자 통계를 제공하는 콘솔 기반 프로젝트.</p>
-        </div>
-
-        <div class="kv-row">
-          <b>개발 기간/인원</b>
-          <p>2025.04–2025.05 (개인)</p>
-        </div>
-
-        <div class="kv-row">
-          <b>기획 의도</b>
-          <ul>
-            <li>단순 CRUD 예제로는 실제 구인·구직 서비스 구조를 충분히 이해하기 어렵다고 느꼈습니다</li>
-            <li>회원·공고·지원 흐름을 직접 설계하여 실제 구직 과정을 콘솔 환경에서 구현했습니다 </li>
-            <li>DB 설계, DAO/VO, 트랜잭션 처리 등 실무 아키텍처 패턴을 학습하기 위해 프로젝트 진행 하였습니다</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <div>
-            <ul>
-              <li>개인/기업 회원, 공고 등록/지원, 지원 상태 변경</li>
-              <li>관리자 통계(사용자/지원 현황) 조회</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="16"
-                height="16" alt="">
-              Java
-            </span>
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg" width="16"
-                height="16" alt="">
-              Oracle
-            </span>
-            <span class="chip">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="16"
-                height="16" alt="">
-              JDBC
-            </span>
-            <span class="chip">
-              <img src="https://cdn-icons-png.flaticon.com/512/1995/1995454.png" width="16" height="16" alt="">
-              DAO/VO
-            </span>
-          </div>
-        </div>
-
-        <!-- 성과·배운 점 -->
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <div>
-            <ul class="learn">
-              <li><b>인덱스와 실행계획 분석</b>을 통해 SQL 성능 최적화 원리 학습</li>
-              <li><b>DAO/Service 분리</b>로 계층형 아키텍처 설계의 중요성 이해</li>
-              <li><b>예외 처리와 트랜잭션 관리</b>를 통해 안정적인 데이터 흐름 관리 방법을 습득</li>
-              <li><b>회원–공고–지원 흐름</b>을 구현하며 실제 구직 서비스 구조를 콘솔 환경에서 모사하는 경험</li>
-              <li><b>데이터베이스 모델링과 DAO/VO 패턴</b>을 통해 실무형 서비스 설계 감각을 익힘</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- 참고 링크 -->
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="ref-list">
-            <a class="ref-link" href="https://github.com/eeeunhey/AlbaItProject" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              <span>https://github.com/eeeunhey/AlbaItProject</span>
-            </a>
-          </div>
-        </div>
-      </div><!-- 🔚 kv-rows 닫음 -->
-    </section>
-
-    <!-- 화면 구분선 -->
-    <div class="page-break"></div>
-
-    <!-- ========== Interview Simulator 상세 ========== -->
-    <section id="interview-detail" class="page">
-      <h2 class="proj-h-lg">Interview Simulator — AI 모의 면접</h2>
-      <div class="proj-sub">2025.09–2025.11 (팀) · React · TypeScript · Recharts · WebRTC · Node.js · Express · MongoDB
+  <div class="cols">
+    <section>
+      <h2>교육과정</h2>
+      <div class="edu">
+        <b>SeSAC 서초캠퍼스 · LLM Agent를 활용한 서비스 기획 및 제작과정</b>
+        <div>AI 에이전트 서비스 기획과 개발, 팀 프로젝트 진행</div>
+        <div class="d">2026.06 - 2026.10 (수료)</div>
       </div>
-      <img class="hero" src="../images/Mockinterview.png" alt="Interview Simulator" />
-      <div class="kv-rows">
-        <div class="kv-row"><b>개요</b>
-          <p>AI 면접 질문 생성부터 STT 기반 답변 분석, 감정·집중도 시각화, 세션 리포트까지 제공하는 모의 면접 웹 서비스입니다.</p>
-        </div>
-        <div class="kv-row"><b>개발 기간/인원</b>
-          <p>2025.09–2025.11 (3개월) · 팀 프로젝트 / 담당: Frontend</p>
-        </div>
-        <div class="kv-row">
-          <b>역할</b>
-          <ul>
-            <li>질문 생성 UI 설계 및 컨트롤 플로우 구현</li>
-            <li>Recharts 기반 감정/집중도 시각화 컴포넌트 제작</li>
-            <li>WebRTC 화상 면접 지원 연동</li>
-            <li>세션 리포트 페이지 구현</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <ul>
-            <li>AI 기반 면접 질문 자동 생성</li>
-            <li>STT(Speech-to-Text) 실시간 답변 인식</li>
-            <li>감정/집중도 분석 시각화 (Recharts)</li>
-            <li>WebRTC 기반 화상 인터븷° 지원</li>
-            <li>백그라운드 업로드 및 세션 리포트</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                width="16" height="16" alt="">React</span>
-            <span class="chip"><img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="16"
-                height="16" alt="">TypeScript</span>
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
-                width="16" height="16" alt="">Node.js</span>
-            <span class="chip"><img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="16"
-                height="16" alt="">MongoDB</span>
-            <span class="chip">🟢 WebRTC</span>
-            <span class="chip">📊 Recharts</span>
-          </div>
-        </div>
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <ul class="learn">
-            <li><b>WebRTC</b> 화상 스트림 연동으로 P2P 통신 구조 이해</li>
-            <li><b>Recharts</b> 로 실시간 데이터 시각화 컴포넌트 설계 경험</li>
-            <li>팀 협업에서 정해진 인터페이스 기반 고첨합 역량 향상</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="refs">
-            <a class="ref-link" href="https://github.com/eeeunhey/MockInterview" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              https://github.com/eeeunhey/MockInterview
-            </a>
-          </div>
-        </div>
+      <div class="edu">
+        <b>고려사이버대학교 AI데이터과학부</b>
+        <div class="d">2026.03 - 재학 중 (편입)</div>
+      </div>
+      <div class="edu">
+        <b>코딩알려주는누나 프론트엔드 과정</b>
+        <div>React 실습, 팀 프로젝트로 우수상 수상</div>
+        <div class="d">2025.07 - 2025.11 (수료)</div>
+      </div>
+      <div class="edu">
+        <b>한국폴리텍대학 성남캠퍼스 하이테크과정</b>
+        <div>Java 웹 백엔드, Python 인공지능 실습</div>
+        <div class="d">2024.01 - 2024.12 (수료)</div>
+      </div>
+      <div class="edu">
+        <b>KDT 국비 과정</b>
+        <div>C, Java, Python 기초</div>
+        <div class="d">2023.03 - 2023.09 (수료)</div>
+      </div>
+      <div class="edu">
+        <b>한국방송통신대학교 식품영양학과</b>
+        <div class="d">2016.02 - 2021.02 (졸업)</div>
       </div>
     </section>
 
-    <div class="page-break"></div>
-
-    <!-- ========== Ascend 상세 ========== -->
-    <section id="ascend-detail" class="page">
-      <h2 class="proj-h-lg">Ascend — AI 이력서 코치 웹</h2>
-      <div class="proj-sub">2025.10–2025.12 (개인) · TypeScript · React · Vite · Tailwind CSS · Zustand · React Query ·
-        Puter.js</div>
-      <img class="hero" src="../images/ascend.png" alt="Ascend" />
-      <div class="kv-rows">
-        <div class="kv-row"><b>개요</b>
-          <p>이력서 PDF를 업로드하면 AI가 섹션별 점수·피드백·키워드 개선안을 제시하는 이력서 코칭 웹 서비스입니다.</p>
-        </div>
-        <div class="kv-row"><b>개발 기간/인원</b>
-          <p>2025.10–2025.12 (3개월) · 개인</p>
-        </div>
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <ul>
-            <li>이력서 PDF 업로드 및 텍스트 추출 (Puter.js)</li>
-            <li>AI 기반 항목별 점수 및 피드백</li>
-            <li>ATS 키워드 맵 시각화</li>
-            <li>섹션별 문구 개선 제안</li>
-            <li>Zustand 전역 상태 관리</li>
-            <li>React Query 비동기 처리</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                width="16" height="16" alt="">React</span>
-            <span class="chip"><img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="16"
-                height="16" alt="">TypeScript</span>
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg"
-                width="16" height="16" alt="">Vite</span>
-            <span class="chip"><img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" width="16"
-                height="16" alt="">Tailwind</span>
-            <span class="chip">📦 Zustand</span>
-            <span class="chip">⚡ React Query</span>
-          </div>
-        </div>
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <ul class="learn">
-            <li><b>Zustand</b> 전역 스토어로 상태 일관성 확보 및 불필요한 리렌더 최소화 경험</li>
-            <li><b>React Query</b>로 비동기 데이터 쪬싱과 로딩/에러 상태 관리 학습</li>
-            <li>PDF 텍스트 추출과 AI 연동 플로우 설계 경험</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="refs">
-            <a class="ref-link" href="https://github.com/eeeunhey/Ascend" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              https://github.com/eeeunhey/Ascend
-            </a>
-          </div>
-        </div>
-      </div>
+    <section>
+      <h2>활동</h2>
+      <ul class="tl">
+        <li class="yr"><span>2026</span></li>
+        <li class="ev"><i>6~10</i><span>SeSAC 서초캠퍼스 과정 수료</span></li>
+        <li class="ev"><i>3~ing</i><span>고려사이버대학교 편입</span></li>
+        <li class="yr"><span>2025</span></li>
+        <li class="ev"><i>7~11</i><span>코딩알려주는누나 프론트엔드 과정 수료</span></li>
+        <li class="yr"><span>2024</span></li>
+        <li class="ev"><i>2~11</i><span>KPS 솔루션팀 근무</span></li>
+        <li class="ev"><i>1~12</i><span>폴리텍 하이테크과정 수료</span></li>
+        <li class="yr"><span>2023</span></li>
+        <li class="ev"><i>3~9</i><span>KDT 국비 과정 수료</span></li>
+        <li class="yr"><span>2021</span></li>
+        <li class="ev"><i>2</i><span>한국방송통신대학교 졸업</span></li>
+        <li class="yr"><span>2019</span></li>
+        <li class="ev"><i>3~21.11</i><span>쿠팡 물류센터 근무</span></li>
+      </ul>
     </section>
-
-    <div class="page-break"></div>
-
-    <!-- ========== ResumeBuilder 상세 ========== -->
-    <section id="resumebuilder-detail" class="page">
-      <h2 class="proj-h-lg">ResumeBuilder — 이력서 작성 지원 웹</h2>
-      <div class="proj-sub">2025.10–2025.11 (개인) · TypeScript · React · Vite · State Management</div>
-      <img class="hero" src="../images/resumeBuild.png" alt="ResumeBuilder" />
-      <div class="kv-rows">
-        <div class="kv-row"><b>개요</b>
-          <p>구직자가 항목별 가이드에 따라 이력서를 작성하고, 실시간으로 미리보기 가능한 이력서 빌더 웹앱입니다.</p>
-        </div>
-        <div class="kv-row"><b>개발 기간/인원</b>
-          <p>2025.10–2025.11 (2개월) · 개인</p>
-        </div>
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <ul>
-            <li>섹션별(경력/학력/스킬/프로젝트) 구조화된 입력 폼</li>
-            <li>실시간 이력서 미리보기 패널</li>
-            <li>상태 관리 기반 입력 데이터 유지</li>
-            <li>UX 중심의 입력 가이드 메시지</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                width="16" height="16" alt="">React</span>
-            <span class="chip"><img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="16"
-                height="16" alt="">TypeScript</span>
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg"
-                width="16" height="16" alt="">Vite</span>
-          </div>
-        </div>
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <ul class="learn">
-            <li>React 상태와 폼 핸들링을 같이 설계하는 구조 학습</li>
-            <li>데이터 입력 흐름과 UI 갱신 효율 최적화 경험</li>
-            <li>사용자 열람을 고려한 UX 응용 설계 연습</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="refs">
-            <a class="ref-link" href="https://github.com/eeeunhey/ResumeBuilder" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              https://github.com/eeeunhey/ResumeBuilder
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <!-- ========== BalanceEat 상세 ========== -->
-    <section id="balanceeat-detail" class="page">
-      <h2 class="proj-h-lg">BalanceEat — AI 식단 관리</h2>
-      <div class="proj-sub">2025.10–2025.11 (팀) · React · TypeScript · Gemini AI API · Nutrition API · Local Storage ·
-        Figma</div>
-      <img class="hero" src="../images/BalanceEat.png" alt="BalanceEat" />
-      <div class="kv-rows">
-        <div class="kv-row"><b>개요</b>
-          <p>음식 섭취 기록과 AI 식단 분석을 통해 균형잡힌 식단 관리를 도와주는 웹 서비스입니다.</p>
-        </div>
-        <div class="kv-row"><b>개발 기간/인원</b>
-          <p>2025.10–2025.11 (2개월) · 4인 팀 / 담당: PO / Frontend</p>
-        </div>
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <ul>
-            <li>Nutrition API 기반 음식 영양 정보 검색</li>
-            <li>Gemini AI를 활용한 맞춤 식단 추천</li>
-            <li>섭취량 시각화 (칼로리/영양소 차트)</li>
-            <li>식단 기록 &amp; 날짜별 히스토리</li>
-            <li>Local Storage 기반 데이터 영속화</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                width="16" height="16" alt="">React</span>
-            <span class="chip"><img
-                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="16"
-                height="16" alt="">TypeScript</span>
-            <span class="chip">🤖 Gemini AI</span>
-            <span class="chip">🍎 Nutrition API</span>
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg"
-                width="16" height="16" alt="">Figma</span>
-          </div>
-        </div>
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <ul class="learn">
-            <li><b>PO 역할</b>에서 요구사항 정리뿐 아니라 전체 진행 흐름 관리 경험</li>
-            <li>AI API 연동과 사용자 정품질 개선 반복 경험</li>
-            <li>Local Storage 설계로 데이터 지속성 유지 방법 학습</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="refs">
-            <a class="ref-link" href="https://github.com/eeeunhey/balanceeat" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              https://github.com/eeeunhey/balanceeat
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <!-- ========== Daily Emotion Log 상세 ========== -->
-    <section id="emotion-detail" class="page">
-      <h2 class="proj-h-lg">Daily Emotion Log — 감정 기록</h2>
-      <div class="proj-sub">2025.12 (팀) · HTML · CSS · JavaScript · Flask (Python) · MariaDB · Google Gemini API ·
-        Cloudtype</div>
-      <img class="hero" src="../images/EmotionLog.png" alt="Daily Emotion Log" />
-      <div class="kv-rows">
-        <div class="kv-row"><b>개요</b>
-          <p>하루를 마무리하며 감정을 기록하고, AI 기반 피드백과 패턴 시각화로 자기 이해를 돕는 웹 서비스입니다.</p>
-        </div>
-        <div class="kv-row"><b>개발 기간/인원</b>
-          <p>2025.12 (1개월) · 5인 팀 / 담당: PM / Full-stack</p>
-        </div>
-        <div class="kv-row">
-          <b>목적 및 역할</b>
-          <ul>
-            <li>PM으로서 요구사항 정리 및 일정 관리</li>
-            <li>Flask 백엔드 API 설계 및 구현</li>
-            <li>Gemini API 연동으로 감정 분석 기능 구현</li>
-            <li>Cloudtype 배포 설정</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>핵심기능</b>
-          <ul>
-            <li>감정 선택 + 자유 메모 입력 UI</li>
-            <li>AI(Gemini API)를 통한 감정 분석 및 피드백</li>
-            <li>날짜별 감정 시각화 (차트 &amp; 타임라인)</li>
-            <li>세션 리포트 및 감정 트렌드 확인</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>기술스택</b>
-          <div class="chips">
-            <span class="chip">🌐 HTML/CSS/JS</span>
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                width="16" height="16" alt="">Python</span>
-            <span class="chip">🏗️ Flask</span>
-            <span class="chip"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-                width="16" height="16" alt="">MariaDB</span>
-            <span class="chip">🤖 Gemini API</span>
-            <span class="chip">☁️ Cloudtype</span>
-          </div>
-        </div>
-        <div class="kv-row">
-          <b>성과·배운 점</b>
-          <ul class="learn">
-            <li><b>PM 공식 역할</b>으로 팀원 일정 및 이슈 비의선 조율 경험</li>
-            <li>Flask + MariaDB 연동으로 Python 백엔드 Full-stack 구현 경험</li>
-            <li>Cloudtype 클라우드 배포로 실제 운영 환경 구성 학습</li>
-          </ul>
-        </div>
-        <div class="kv-row">
-          <b>참고 링크</b>
-          <div class="refs">
-            <a class="ref-link" href="https://github.com/eeeunhey/daily-emotion-log" target="_blank">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub"
-                class="icon">
-              https://github.com/eeeunhey/daily-emotion-log
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 화면 구분선 -->
-    <div class="page-break"></div>
-
-    <!-- ====== 자기소개서 PAGE 1 ====== -->
-    <section id="about-me" class="page about-page">
-      <div class="about">
-
-        <h2>자기소개서</h2>
-
-        <!-- ── 1. 개발을 선택한 이유 ── -->
-        <h3>개발을 선택한 이유</h3>
-        <p>
-          대학에서 식품영양학을 전공하고 졸업한 뒤, 쿠팡 물류센터에서 전산·관리 업무를 약 3년간 담당했습니다.
-          재고 데이터를 정리하고, 출고 흐름을 점검하고, 단기 인력의 배치와 스케줄을 조율하는 일이 주된 업무였습니다.
-          매일 반복되는 수작업 속에서 <b>"이 작업을 자동화할 수 있다면 훨씬 정확하고 빠를 텐데"</b>라는 생각이 자주 스쳤고,
-          그것이 개발에 관심을 갖게 된 첫 계기였습니다.
-        </p>
-        <p>
-          막연한 관심에서 실제 전환을 결심하는 데는 용기가 필요했습니다.
-          비전공자라는 불안감이 있었지만, KDT 국비 과정에서 Java·Python 기초를 다지고
-          성남 폴리텍 하이테크 과정에서 Spring Boot와 React 기반의 실습 프로젝트를 진행하면서
-          <b>"모르는 것을 배워서 직접 만들어내는 과정"</b> 자체가 저와 잘 맞는다는 확신이 생겼습니다.
-          처음 내 손으로 만든 웹 페이지가 브라우저에서 동작하는 순간, 이 길이 맞다고 느꼈습니다.
-          현재는 고려사이버대학교 AI 데이터과학부에 편입해 이론적 기반도 병행하며 준비하고 있습니다.
-        </p>
-
-        <!-- ── 2. 나만의 학습 방식 ── -->
-        <h3>나만의 학습 방식</h3>
-        <p>
-          새로운 기술을 접할 때 저는 튜토리얼을 따라 치는 것보다 <b>"왜 이 기술이 필요한지"</b>부터 이해하려 합니다.
-          목적을 먼저 파악하면 구조가 보이고, 응용할 때도 방향을 잡기가 훨씬 수월합니다.
-          모르는 부분이 생기면 공식 문서와 에러 메시지를 먼저 읽고, 그래도 해결이 안 되면
-          같은 상황을 겪은 사람들의 기록을 찾아가며 직접 원인을 파악하려 합니다.
-          이 습관이 쌓이면서 새로운 기술을 만나도 <b>겁부터 나기보다 어떻게 파고들지를 먼저 생각</b>하게 되었습니다.
-        </p>
-        <p>
-          Ascend(이력서 코칭 웹) 프로젝트를 예로 들면, 처음엔 props drilling으로 데이터를 전달했지만
-          화면이 복잡해질수록 어디서 상태가 바뀌는지 추적이 어려워졌습니다.
-          그래서 <b>Zustand로 전역 상태를 분리</b>하고, 서버 데이터는 React Query로 관리하는 구조로 리팩토링했습니다.
-          "왜 나눠야 하는지"를 직접 겪고 나니, 라이브러리 선택 기준이 단순 유행에서 <b>프로젝트 맥락에 따른 판단</b>으로 바뀌었습니다.
-        </p>
-        <p>
-          ALBAIT(콘솔 구인·구직) 프로젝트에서는 SQL을 로직 안에 직접 작성하다 보니
-          기능이 늘수록 수정 범위가 예측 불가능해졌습니다.
-          이를 계기로 <b>DAO/DTO 패턴을 도입</b>해 데이터 접근 계층을 분리했고,
-          "데이터가 어디서 만들어져서 어디로 전달되는지"가 코드만 봐도 보이는 구조를 만들 수 있었습니다.
-          이런 경험들이 쌓이면서 저는 <b>좋은 코드란 "동작하는 코드"가 아니라 "이해할 수 있는 코드"</b>라는
-          생각을 갖게 되었습니다.
-        </p>
-
-        <!-- ── 3. 협업과 책임감 ── -->
-        <h3>협업과 책임감</h3>
-        <p>
-          7개의 프로젝트 중 4개를 팀으로 진행했습니다.
-          Interview Simulator에서는 프론트엔드를 맡으면서 백엔드 팀원과 함께 API 명세를 먼저 정리했고,
-          Daily Emotion Log에서는 PM으로 5인 팀의 일정과 역할 분배를 조율했습니다.
-          팀으로 일하면서 가장 크게 배운 건, <b>소통이 기술만큼 중요하다</b>는 점이었습니다.
-          서로 다른 방식으로 일하는 팀원들과 방향을 맞추고, 막히는 부분을 함께 풀어나가는 경험이
-          코드를 짜는 것 못지않게 값진 시간이었습니다.
-        </p>
-        <p>
-          팀으로 일하면서 알게 된 것이 있습니다.
-          같은 문제도 사람마다 전혀 다른 방식으로 풀어간다는 것입니다.
-          그 과정을 곁에서 보다 보면 자연스럽게 배우게 되고,
-          막힌 부분을 함께 살펴보다가 방향이 잡히는 순간에는 같이 기뻤습니다.
-          저는 <b>팀 전체가 같은 방향을 보며 막히지 않고 나아가는 것</b>이
-          결국 더 완성도 높은 결과물을 만든다고 생각합니다.
-        </p>
-        <p>
-          BalanceEat 프로젝트에서 PO를, Daily Emotion Log에서 PM을 맡았을 때는 솔직히 많이 어려웠습니다.
-          개발 업무와 달리 <b>"보이지 않는 것을 그려내는 일"</b>이었기 때문입니다.
-          요구사항이 모호한 상태에서 기획 방향을 정해야 했고, 팀원들이 각자 다르게 이해하고 있다는 걸
-          한참 지나서야 알아차린 적도 있었습니다. 소통을 더 자주, 더 명확히 해야 한다는 걸
-          경험으로 몸소 깨달은 시간이었습니다.
-        </p>
-        <p>
-          이 한계를 극복하기 위해 AI Studio와 프롬프트 기반 프로토타이핑 툴로
-          먼저 화면의 틀을 시각화한 뒤 팀원들과 공유하는 방식을 시도했습니다.
-          완벽하지는 않았지만, <b>"말로 설명하는 것"보다 "보여주는 것"이 훨씬 빠르게 맞춰진다</b>는 것을 확인했습니다.
-        </p>
-        <p>
-          돌아보면 가장 어려웠던 건 기획 도구가 아니라 <b>소통 그 자체</b>였습니다.
-          상대방의 말을 듣고 있었지만, 내 방식대로 해석하고 있었다는 걸 뒤늦게 알아차렸습니다.
-          그 결과로 방향이 어긋났을 때, 저는 처음으로 이런 질문을 하게 되었습니다.
-          <b>"나는 최선을 다했는가, 아니면 나를 위한 최선을 다했는가?"</b>
-          그 차이가 팀 안에서는 생각보다 훨씬 크다는 걸, 그때 처음 실감했습니다.
-        </p>
-        <p>
-          조급하거나 불안한 상황일수록 시야가 좁아진다는 것도 알게 되었습니다.
-          그럴 때일수록 오히려 한 발 물러서서 "팀이 지금 무엇을 필요로 하는가"를
-          먼저 파악해야 한다는 걸 그 경험이 가르쳐 주었습니다.
-          현재는 《비폭력 대화》(마샬 B. 로젠버그)를 읽으며
-          <b>"상대방이 한 말이 아니라, 하고 싶었던 말을 듣는 것"</b>에 대해 공부하고 있습니다.
-          이 경험이 없었다면 내가 무엇을 모르는지조차 알지 못했을 것입니다.
-          <b>좌절했기 때문에, 오히려 더 단단한 방향으로 성장할 수 있었습니다.</b>
-        </p>
-
-      </div>
-    </section>
-
-    <div class="page-break"></div>
-
-    <!-- ====== 자기소개서 PAGE 2 ====== -->
-    <section id="about-me-2" class="page about-page">
-      <div class="about">
-
-        <h2>자기소개서 <span style="font-size:.6em; color:var(--muted); font-weight:400;">(계속)</span></h2>
-
-        <!-- ── 4. 기술 적용 경험 ── -->
-        <h3>기술 적용 경험</h3>
-        <p>
-          프로젝트를 거듭하면서 가장 크게 배운 건, 기술 자체보다 <b>어떤 문제를 풀기 위해 그 기술을 썼는지</b>가 더 중요하다는 점이었습니다.
-        </p>
-
-        <h3>TypeScript 도입으로 유지보수 속도 개선</h3>
-        <p>
-          Ascend와 ResumeBuilder를 처음 만들 때는 JavaScript만으로 충분하다고 생각했습니다.
-          그런데 컴포넌트가 20개를 넘기면서 문제가 생기기 시작했습니다.
-          어떤 컴포넌트에 어떤 props를 넘겨야 하는지, API에서 받아온 데이터의 구조가 어떤 형태인지
-          매번 콘솔에 찍어보거나 다른 파일을 열어서 확인해야 했습니다.
-          간단한 수정 하나에도 관련 파일을 3~4개씩 뒤져야 하는 상황이 반복되었습니다.
-        </p>
-        <p>
-          TypeScript를 도입한 뒤 가장 먼저 달라진 건 <b>IDE가 코드의 맥락을 알려준다</b>는 점이었습니다.
-          API 응답 타입을 interface로 한 번 정의해두니, 그 데이터를 사용하는 모든 곳에서 자동완성이 되었고
-          구조가 바뀌면 빌드 전에 에러가 띄워졌습니다.
-          특히 여러 화면에서 같은 데이터를 다르게 해석하던 문제가 사라지면서,
-          <b>"이 값이 어디서 왔고, 어떤 형태인지"를 코드만 보고 바로 파악</b>할 수 있게 되었습니다.
-          돌이켜보면 TypeScript는 단순한 타입 검사 도구가 아니라, 팀원이 없는 개인 프로젝트에서
-          <b>과거의 내가 미래의 나에게 남기는 문서</b> 같은 역할을 해주었습니다.
-        </p>
-
-        <h3>Zustand 전역 스토어로 상태 불일치 개선</h3>
-        <p>
-          Ascend 프로젝트에서 이력서 업로드 → AI 분석 → 결과 표시 → 코칭 피드백까지의 흐름을 만들다 보니,
-          분석 결과를 보여주는 화면, 수정 입력을 받는 화면, 최종 요약 화면이 각각 따로 상태를 들고 있었습니다.
-          한 화면에서 데이터를 수정해도 다른 화면에는 반영이 안 되거나,
-          뒤로 갔다 돌아오면 입력값이 초기화되는 문제가 계속 생겼습니다.
-          처음에는 props로 넘기면 해결되겠지 싶었지만, 중간 컴포넌트가 많아지면서 drilling이 5단계까지 내려가는 상황이 되었습니다.
-        </p>
-        <p>
-          Zustand를 도입해 분석 결과, 사용자 입력, UI 상태를 <b>각각의 store로 나눠서 한 곳에서 관리</b>하도록 바꿨습니다.
-          각 컴포넌트는 자기가 필요한 값만 selector로 구독하게 만들었더니,
-          불필요하게 전체가 리렌더링되던 현상이 눈에 띄게 줄었고
-          버그가 생겼을 때도 "어느 store의 어떤 액션에서 값이 바뀌었는지"를 바로 추적할 수 있었습니다.
-          이 경험을 통해 <b>상태 관리는 도구 선택보다 "무엇을 전역으로 올릴 것인가"에 대한 판단</b>이
-          더 중요하다는 것을 체감했습니다.
-        </p>
-
-        <h3>DAO/DTO 패턴으로 DB 연동 구조 개선</h3>
-        <p>
-          ALBAIT은 Java 콘솔 기반으로 만든 구인·구직 매칭 프로젝트였습니다.
-          처음에는 서비스 로직 안에 SQL 쿼리를 직접 작성했는데,
-          회원 관리, 채용 공고, 지원 내역 세 가지 도메인이 하나의 클래스에 뒤섞이다 보니
-          한 기능을 수정하면 예상치 못한 곳에서 오류가 발생하는 일이 잦아졌습니다.
-          예를 들어, 공고 목록 조회를 고쳤더니 지원 내역 화면에서 NullPointerException이 터지는 식이었습니다.
-        </p>
-        <p>
-          이를 해결하기 위해 <b>DAO로 데이터베이스 접근을, DTO로 계층 간 데이터 전달을 분리</b>했습니다.
-          회원DAO, 공고DAO, 지원DAO로 나누고, 각 DAO는 자기 테이블만 책임지도록 했습니다.
-          서비스 로직에서는 DTO 객체를 통해 필요한 데이터만 주고받게 되면서,
-          <b>"어떤 데이터가 어디서 만들어져서 어디로 가는지"</b>가 코드 구조만 보고도 파악할 수 있게 되었습니다.
-          이후 "인기 공고 추천" 기능을 추가할 때도 기존 코드 수정 없이 새 DAO 메서드만 추가해서 해결할 수 있었고,
-          <b>구조를 나누는 것이 기능을 빼는 게 아니라 오히려 확장을 쉽게 만든다</b>는 걸 직접 경험했습니다.
-        </p>
-
-        <!-- ── 5. 앞으로의 방향 ── -->
-        <h3>앞으로의 다짐</h3>
-        <p>
-          지난 2년간 7개의 프로젝트를 통해 프론트엔드(React, TypeScript)부터 백엔드(Spring Boot, JPA), AI 연동(LLM, Object Detection)까지 직접
-          구현해보았습니다.
-          물론 아직 실무 경험이 부족한 주니어입니다.
-          하지만 <b>모르는 것을 인정하고 빠르게 배우는 것</b>, 그리고 <b>막히는 상황에서 포기 대신 우회 경로를 찾는 것</b>은 자신 있습니다.
-        </p>
-        <p>
-          쿠팡에서 3년간 물류 현장을 경험하며 익힌 업무 이해력과 커뮤니케이션 역량,
-          그리고 비전공에서 출발해 스스로 기술 스택을 쌓아온 자기 주도적 학습 능력을 바탕으로,
-          <b>팀에 빠르게 적응하고, 맡은 일을 끝까지 완성하는 개발자</b>가 되겠습니다.
-        </p>
-        <p>
-          부족한 부분은 빠르게 채워가며, <b>함께 일하고 싶은 동료</b>로 기억되는 개발자가 되겠습니다.
-        </p>
-
-      </div>
-    </section>
-
   </div>
-</body>
 
+  <h2>수상경력</h2>
+  <ul class="awards">
+    <li>2025 한국폴리텍대학 성남캠퍼스 하이테크과정 부문 <b>금상</b></li>
+    <li>2025 한국실천공학교육학회 <b>동상</b></li>
+    <li>2025 코딩알려주는누나 프로젝트 <b>우수상</b> (BalanceEat)</li>
+  </ul>
+
+  <h2>자격증</h2>
+  <ul class="awards">
+    <li>컴퓨터활용능력 1급 · 2급</li>
+    <li>ITQ A등급 (한글 · 엑셀 · 파워포인트)</li>
+    <li>GTQ 1급 · 2급</li>
+    <li>자동차운전면허 1종 보통</li>
+  </ul>
+
+  <h2>보유 기술</h2>
+  <div class="skills">
+    <div><b>프론트엔드</b><span>React, TypeScript, Next.js, Tailwind CSS</span></div>
+    <div><b>백엔드</b><span>Java, Spring Boot, Node.js, Flask</span></div>
+    <div><b>AI</b><span>Python, LangChain, LangGraph, Gemini API</span></div>
+    <div><b>DB · 배포</b><span>Oracle, MariaDB, MongoDB, Supabase, Docker, Vercel</span></div>
+    <div><b>기타</b><span>C# WinForms, Git, Figma</span></div>
+  </div>
+
+  <h2>경력</h2>
+  <div class="entry">
+    <h3>KPS · 솔루션팀 머신비전 파트 <span class="dt">(2024.02 - 2024.11)</span></h3>
+    <p>머신비전 검사 장비 셋팅 지원 및 C# 검사 프로그램 유지보수</p>
+    <ul>
+      <li><b>기술 |</b> C#, WinForms</li>
+      <li>비전 검사 셋팅 및 카메라 파라미터 조정 지원</li>
+      <li>WinForms 검사 프로그램 UI 일부 수정 및 테스트</li>
+      <li>테스트 결과 정리 및 개선 사항 보고</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <h3>쿠팡 물류센터 · 전산 / 관리 <span class="dt">(2019.03 - 2021.11)</span></h3>
+    <p>출고 전산 점검과 인력 배치를 담당</p>
+    <ul>
+      <li>단기 인력 배치와 근무 스케줄 조율</li>
+      <li>출고 전산 점검 및 하루 마감 관리</li>
+      <li>마감 시간대 현장 소통 · 조율</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PAGE 2 ============ -->
+<div class="page">
+  <h2 style="margin-top:0">자기계발</h2>
+
+  <div class="entry">
+    <h3>PPT 자동 번역 도구 <span class="dt">| 개인</span></h3>
+    <p>PPTX 파일의 텍스트를 추출·번역해 원래 위치에 다시 넣는 웹 도구</p>
+    <ul>
+      <li><b>기술 |</b> Python, Flask, python-pptx, Docker</li>
+      <li>슬라이드의 도형 · 표 셀 · 그룹 도형 안의 텍스트 추출</li>
+      <li>텍스트를 run 단위로 교체해 기존 서식을 유지하고, 길어진 문장은 글꼴 크기 조정</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/PPT_Translate">github.com/eeeunhey/PPT_Translate</a>
+  </div>
+
+  <div class="entry">
+    <h3>git-runner-box <span class="ctx">- 깃허브 활동 시각화</span> <span class="dt">| 개인</span></h3>
+    <p>1년간의 깃허브 기여 기록을 달리기 코스 형태로 Gist에 표시하는 도구</p>
+    <ul>
+      <li><b>기술 |</b> TypeScript, GitHub GraphQL API, GitHub Actions</li>
+      <li>GraphQL API로 일별 기여 데이터를 조회하고, Octokit으로 Gist 내용 갱신</li>
+      <li>GitHub Actions 예약 실행으로 자동 업데이트, 토큰 · Gist ID는 환경 변수로 분리</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/git-runner-box">github.com/eeeunhey/git-runner-box</a>
+  </div>
+
+  <div class="entry">
+    <h3>ExcelAuto <span class="ctx">- 파이썬 엑셀 자동화 학습</span> <span class="dt">| 개인</span></h3>
+    <p>반복적인 엑셀 작업을 코드로 처리하는 방법을 실습한 학습 기록</p>
+    <ul>
+      <li><b>기술 |</b> Python, pandas, openpyxl, xlwings</li>
+      <li>여러 시트 순회 처리, 데이터 취합, 셀 서식 · 차트 생성, pandas 전처리 실습</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/ExcelAuto">github.com/eeeunhey/ExcelAuto</a>
+  </div>
+
+  <div class="entry">
+    <h3>개인 포트폴리오 사이트 <span class="dt">| 개인</span></h3>
+    <p>프로젝트와 경력을 정리한 개인 웹사이트</p>
+    <ul>
+      <li><b>기술 |</b> React, Vite, Tailwind CSS, Vercel</li>
+      <li>React 상태와 Tailwind의 dark 클래스로 다크 모드 전환, 반응형 레이아웃</li>
+    </ul>
+    <a class="link" href="https://eunhye-portfolio.vercel.app/">eunhye-portfolio.vercel.app</a>
+  </div>
+
+  <h2>프로젝트</h2>
+
+  <div class="entry">
+    <h3>Culture Fit Agent <span class="ctx">- 조직 적합도 분석 AI 에이전트</span> <span class="dt">| SeSAC 팀 프로젝트 | 2026</span></h3>
+    <p>기업의 인재상 · 조직문화와 지원자 서류를 비교해 적합도와 위험 요인을 근거와 함께 분석</p>
+    <ul>
+      <li><b>담당 |</b> 지원자 분석 파트, 공통 모듈 구조 설계, 그래프 통합</li>
+      <li><b>기술 |</b> Python, LangGraph, LangChain, Pydantic</li>
+      <li>기업 · 지원자 분석을 별도 에이전트로 나누고 LangGraph State로 결과를 연결</li>
+      <li>Pydantic 스키마로 LLM 출력 구조를 고정해 평가 근거와 결과 형식을 일관되게 유지</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/culture-fit-agent">github.com/eeeunhey/culture-fit-agent</a>
+  </div>
+
+  <div class="entry">
+    <h3>QUOKIT <span class="ctx">- 인기 오픈소스 한국어 소개 서비스</span> <span class="dt">| 개인 | 2026.01 - 진행 중</span></h3>
+    <p>GitHub Trending 저장소를 수집해 README를 한국어로 번역해 보여주는 웹 서비스</p>
+    <ul>
+      <li><b>기술 |</b> Next.js, TypeScript, Prisma, Supabase, Redis, Vercel Cron</li>
+      <li>Cheerio로 트렌딩 페이지 스크래핑, 번역 실패 시 다른 번역 API로 넘어가는 fallback 구성</li>
+      <li>Redis → DB → 외부 API 순으로 조회하는 캐시 계층으로 중복 번역 방지</li>
+      <li>Vercel Cron으로 수집 · 번역 · 캐시 정리를 주기 실행, 토픽 교집합 기반 유사 저장소 추천</li>
+    </ul>
+    <a class="link" href="https://quokit-kr.vercel.app/">quokit-kr.vercel.app</a>
+  </div>
+
+  <div class="entry">
+    <h3>Daily Emotion Log <span class="ctx">- 감정 기록 서비스</span> <span class="dt">| 5인 팀 · PM / 백엔드 | 2025.12</span></h3>
+    <p>감정과 메모를 기록하면 AI 피드백을 주고, 날짜별 감정 변화를 차트로 보여주는 서비스</p>
+    <ul>
+      <li><b>담당 |</b> 일정 · 역할 관리, Flask API 설계 · 구현, Gemini 연동, Cloudtype 배포</li>
+      <li><b>기술 |</b> Flask, MariaDB, Gemini API, JavaScript</li>
+      <li>감정 유형별로 프롬프트를 분리하고 응답을 JSON으로 파싱해 일정한 형식으로 저장</li>
+      <li>API 실패 시 try-catch와 재시도 버튼, 응답 대기 중 스켈레톤 UI 표시</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/daily-emotion-log">github.com/eeeunhey/daily-emotion-log</a>
+  </div>
+
+  <div class="entry">
+    <h3>BalanceEat <span class="ctx">- AI 식단 관리 · 우수상</span> <span class="dt">| 4인 팀 · PO / 프론트엔드 | 2025.10 - 2025.11</span></h3>
+    <p>음식을 입력하면 영양소를 계산하고, 부족한 영양소에 맞춰 AI가 식단을 추천하는 서비스</p>
+    <ul>
+      <li><b>담당 |</b> Figma 와이어프레임으로 요구사항 정리, 음식 검색 · 영양 달성률 차트 구현</li>
+      <li><b>기술 |</b> React, TypeScript, Gemini API, Nutrition API</li>
+      <li>API 응답마다 누락되는 영양 필드를 기본값으로 정규화하고 interface로 타입 고정</li>
+      <li>React.memo · useMemo로 바뀐 영양소 차트만 다시 렌더링</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/balanceeat">github.com/eeeunhey/balanceeat</a>
+  </div>
+
+  <div class="entry">
+    <h3>Ascend <span class="ctx">- AI 이력서 첨삭</span> <span class="dt">| 개인 | 2025.10 - 2025.12</span></h3>
+    <p>이력서 PDF를 올리면 AI가 항목별 점수와 수정 문장, 누락 키워드를 제안하는 서비스</p>
+    <ul>
+      <li><b>기술 |</b> React, TypeScript, Zustand, React Query, Puter.js</li>
+      <li>PDF 텍스트를 정규표현식으로 경력 · 학력 · 기술 섹션으로 분리해 AI에 전달</li>
+      <li>UI 상태는 Zustand, 서버 데이터는 React Query로 분리해 props drilling 제거</li>
+      <li>React Query 캐싱으로 같은 이력서의 중복 AI 호출 방지</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/Ascend">github.com/eeeunhey/Ascend</a>
+  </div>
+
+  <div class="entry">
+    <h3>ResumeProject <span class="ctx">- AI 이력서 진단</span> <span class="dt">| 개인 | <span class="todo">기간</span></span></h3>
+    <p>AI 이력서 진단 웹 애플리케이션</p>
+    <ul>
+      <li><b>기술 |</b> React 19, React Router 7, TypeScript, Docker</li>
+      <li>React Router 7 기반 라우팅 구성, Dockerfile 작성 후 Vercel 배포</li>
+    </ul>
+    <a class="link" href="https://resume-project-steel.vercel.app/">resume-project-steel.vercel.app</a>
+  </div>
+
+  <div class="entry">
+    <h3>ResumeBuilder <span class="ctx">- 이력서 작성 도우미</span> <span class="dt">| 개인 | 2025.10 - 2025.11</span></h3>
+    <p>항목별로 입력하면 옆 화면에 이력서가 실시간으로 반영되는 작성 도구</p>
+    <ul>
+      <li><b>기술 |</b> React, TypeScript</li>
+      <li>입력할 때마다 미리보기 전체가 리렌더링되는 문제를 React.memo · useMemo로 섹션 단위 분리</li>
+      <li>동적 항목에 고유 key를 부여해 추가 · 삭제 시 입력값이 섞이는 버그 해결</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/ResumeBuilder">github.com/eeeunhey/ResumeBuilder</a>
+  </div>
+
+  <div class="entry">
+    <h3>Interview Simulator <span class="ctx">- AI 모의 면접</span> <span class="dt">| 팀 · 프론트엔드 | 2025.09 - 2025.11</span></h3>
+    <p>카메라 · 마이크로 표정과 답변을 기록해 면접 결과를 하나의 타임라인으로 보여주는 서비스</p>
+    <ul>
+      <li><b>담당 |</b> 질문 생성 화면, Recharts 감정 · 집중도 차트, WebRTC 연동, 결과 리포트</li>
+      <li><b>기술 |</b> React, TypeScript, WebRTC, Recharts</li>
+      <li>주기가 다른 표정 데이터와 STT 결과에 ms 단위 타임스탬프를 붙여 같은 시간축으로 정렬</li>
+      <li>getUserMedia 권한 거부 시 예외 처리, 연결 → 녹화 → 분석 단계를 상태로 관리</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/MockInterview">github.com/eeeunhey/MockInterview</a>
+  </div>
+
+  <div class="entry">
+    <h3>Velin <span class="ctx">- AI 면접 준비</span> <span class="dt">| 개인 | 2025.08 - 2025.09</span></h3>
+    <p>직무와 경력을 입력하면 예상 질문, 답변 방향, 체크리스트를 생성하는 서비스</p>
+    <ul>
+      <li><b>기술 |</b> React, Node.js, Express, MongoDB, Vercel</li>
+      <li>직무 · 경력 수준에 따라 프롬프트 템플릿을 동적으로 조합</li>
+      <li>JWT 인증 적용, AI 응답 지연 시 타임아웃과 재시도 처리</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/AI_InterviewPrep">github.com/eeeunhey/AI_InterviewPrep</a>
+  </div>
+
+  <div class="entry">
+    <h3>ALBAIT <span class="ctx">- 구인 · 구직 프로그램</span> <span class="dt">| 개인 | 2025.04 - 2025.05</span></h3>
+    <p>회원 · 채용공고 · 지원 관리와 관리자 통계를 갖춘 콘솔 프로그램</p>
+    <ul>
+      <li><b>기술 |</b> Java, JDBC, Oracle DB</li>
+      <li>Service · DAO · DTO 계층을 분리해 DB 접근 코드와 비즈니스 로직 분리</li>
+      <li>PreparedStatement 파라미터 바인딩으로 SQL 인젝션 방지</li>
+      <li>JOIN · GROUP BY로 인기 공고, 지역 · 직종별 통계 쿼리 작성</li>
+    </ul>
+    <a class="link" href="https://github.com/eeeunhey/AlbaItProject">github.com/eeeunhey/AlbaItProject</a>
+  </div>
+
+  <h2>개발 커뮤니티 활동</h2>
+  <div class="comm">
+    <div>
+      <h3>파이콘 한국 2026</h3>
+      <ul>
+        <li>행사 자원봉사자</li>
+        <li>담당 업무: 세션 진행 지원</li>
+      </ul>
+    </div>
+    <div>
+      <h3><span class="todo">행사명</span> 2025 (C# · .NET)</h3>
+      <ul>
+        <li>행사 자원봉사자</li>
+        <li>세션 진행 지원 보조</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
 </html>

@@ -109,19 +109,40 @@ export const ResumePage = () => {
                         />
                     </div>
 
-                    {/* ── 모바일 대비 메시지 ── */}
-                    <p className="text-center text-xs text-muted-foreground mt-4">
-                        PDF가 보이지 않으면{" "}
-                        <a
-                            href={resumes[active].file}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="text-primary hover:underline"
-                        >
-                            새 탭에서 열기
-                        </a>
-                        {" "}또는 다운로드 버튼을 이용해 주세요.
-                    </p>
+                    {/* ── 모바일 대비 메시지 & 웹 문서 바로가기 ── */}
+                    <div className="text-center text-xs text-muted-foreground mt-4 space-y-2">
+                        <p>
+                            PDF가 보이지 않으면{" "}
+                            <a
+                                href={resumes[active].file}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-primary hover:underline"
+                            >
+                                새 탭에서 열기
+                            </a>
+                            {" "}또는 다운로드 버튼을 이용해 주세요.
+                        </p>
+                        <div className="flex justify-center items-center gap-3 text-xs pt-1">
+                            <a
+                                href="/myinfo/Portfolio.html"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-primary/80 hover:text-primary hover:underline font-medium"
+                            >
+                                웹 포트폴리오(HTML) 보기 →
+                            </a>
+                            <span className="text-border">|</span>
+                            <a
+                                href="/myinfo/Resume.html"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="text-primary/80 hover:text-primary hover:underline font-medium"
+                            >
+                                웹 이력서(HTML) 보기 →
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
